@@ -1,0 +1,19 @@
+.dashbordcard{
+    width: 300px;
+    padding: 25px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    img{
+        width: 70px;
+        height: 70px;
+        
+    }
+    p{
+        font-size: 18px;
+        margin: 10px 0;
+    }
+    h3{
+        font-size: 35px;
+    }
+}

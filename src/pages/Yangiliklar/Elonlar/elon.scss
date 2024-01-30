@@ -1,0 +1,75 @@
+.elontitle{
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 35px;
+}
+.eloshortdescription , .elondescription{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+
+}
+.elontextarea{
+    width: 30%;      
+}
+.elonimg{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.eloninput{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: column-reverse;
+}
+.eloninput > input{
+    width: 0;height: 0;
+    overflow: hidden;
+}
+.eloninput__btn{
+    padding:10px 15px;
+    background-color: #1976d2;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.elonimge__names{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.elonimage__inner{
+    border: 1px solid #6e6d6d;
+    padding: 5px 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.closeinner{
+    cursor: pointer;
+}
+.sumbitbuttonelon{
+    display: flex;
+    width: 300px;
+    margin: 10px auto !important;
+}
+.submitwrap{
+    display: flex;
+  justify-content: center;
+}
+.elontitleinput{
+    width: 30%;
+}
+.elontitlewrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+}
