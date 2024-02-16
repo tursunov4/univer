@@ -86,9 +86,9 @@ function App() {
       <BrowserRouter>
         <Routes>
             <Route path="/login" element={<SignIn />} />
-          <Route element={<PrivateRoutes/>}>
+            <Route element={<PrivateRoutes/>}>
             <Route path="*" element={<NotFound/>} />
-              <Route path="/" element={<Layout/>}>
+             <Route path="/" element={<Layout/>}>
             <Route index element={<Dashboard/>} />
             <Route path="/elonlar" element={<Elonlar/>}/>  
             <Route path="/latesnews" element={<Sungiyangiliklar/>}/>

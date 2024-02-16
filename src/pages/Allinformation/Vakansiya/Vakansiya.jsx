@@ -227,7 +227,6 @@ useEffect(()=>{
   return (
     <>
       <ToastContainer/>
-
       <div className="add__newbtn">
        <Button onClick={()=>setModal(true)} variant="contained">
       Add new
