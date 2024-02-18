@@ -210,20 +210,20 @@ const Sungiyangiliklar = () => {
           }
           if (res.status === 200) {
             handleClose();
-            toast.error("Qushilgan malumotlarda kamchilik bor !!!", {
-              position: "top-right",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
           }
         })
         .catch((err) => {
           console.log(err);
+          toast.error("Qushilgan malumotlarda kamchilik bor !!!", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         });
     }
   };
