@@ -29,7 +29,7 @@ const Vakansiyalar = () => {
   const [titleRu, setTitleRu] = useState("");
   const [titleKr, setTitleKr] = useState("");
   const [positionEn, setPositionEn] = useState("");
-  const [positonUz, setPositionUz] = useState("");
+  const [positionUz, setPositionUz] = useState("");
   const [positionRu, setPositionRu] = useState("");
   const [positionKr, setPositionKr] = useState("");
   const [descriptionuz, setDescriptionuz] = useState("");
@@ -267,7 +267,6 @@ const Vakansiyalar = () => {
     setDescriptionuz(data?.descriptionUZ);
     setDescriptionkr(data?.descriptionKR);
     setSalary(data?.salary);
-    
   };
 
   useEffect(() => {
@@ -332,7 +331,7 @@ const Vakansiyalar = () => {
           <div className="elontitlewrapper">
             <TextField
               onChange={(e) => setPositionUz(e.target.value)}
-              defaultValue={positonUz}
+              defaultValue={positionUz}
               className="elontitleinput"
               id="outlined-basic"
               label="PositionUz"
