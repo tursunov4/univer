@@ -9,6 +9,7 @@ import http from "../../../untils/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Uquvtable from "../../../components/Uquvtable/Uquvtable";
+import Kanferensiyatable from "../../../components/Uquvtable/Kaferensiya";
 const style = {
   position: "fixed",
   top: "50%",
@@ -34,6 +35,10 @@ const Kanferensiyalar = () => {
   const [titleUz, setTitleUz] = useState("");
   const [titleRu, setTitleRu] = useState("");
   const [titleKr, setTitleKr] = useState("");
+  const [titEn, setTitEn] = useState("");
+  const [titUz, setTitUz] = useState("");
+  const [titRu, setTitRu] = useState("");
+  const [titKr, setTitKr] = useState("");
   const [dateEN, setDateEN] = useState("");
   const [dateUZ, setDateUZ] = useState("");
   const [dateRU, setDateRU] = useState("");
@@ -64,6 +69,10 @@ const Kanferensiyalar = () => {
           dateUZ: dateUZ,
           dateRU: dateRU,
           dateKR: dateKR,
+          titleKR: titKr,
+          titleRU: titRu,
+          titleUZ: titUz,
+          titleEN: titEn,
           email: email,
           phone: phone,
           sana: sana,
@@ -134,6 +143,10 @@ const Kanferensiyalar = () => {
           addressRU: titleRu,
           addressUZ: titleUz,
           addressEN: titleEn,
+          titleKR: titKr,
+          titleRU: titRu,
+          titleUZ: titUz,
+          titleEN: titEn,
           dateEN: dateEN,
           dateUZ: dateUZ,
           dateRU: dateRU,
@@ -211,6 +224,10 @@ const Kanferensiyalar = () => {
     setTitleKr("");
     setTitleUz("");
     setTitleEn("");
+    setTitRu("");
+    setTitKr("");
+    setTitUz("");
+    setTitEn("");
     setDateRU("");
     setDateKR("");
     setDateUZ("");
@@ -276,13 +293,16 @@ const Kanferensiyalar = () => {
     setTitleKr(data?.addressKR);
     setTitleUz(data?.addressUZ);
     setTitleEn(data?.addressEN);
+    setTitRu(data?.titleRU);
+    setTitKr(data?.titleKR);
+    setTitUz(data?.titleUZ);
+    setTitEn(data?.titleEN);
     setDateRU(data?.dateRU);
     setDateKR(data?.dateKR);
     setDateUZ(data?.dateUZ);
     setDateEN(data?.dateEN);
     setEmail(data?.email);
     setPhone(data?.phone);
-    setSana(data?.sana);
   };
 
   useEffect(() => {
@@ -297,7 +317,7 @@ const Kanferensiyalar = () => {
           Add new
         </Button>
       </div>
-      <Uquvtable
+      <Kanferensiyatable
         handleEdit={handleEdit}
         data={allData}
         handleDelete={deleteData}
@@ -311,6 +331,40 @@ const Kanferensiyalar = () => {
       >
         <Box sx={style}>
           <h2 className="elontitle">Kanferensiyalar</h2>
+          <div className="elontitlewrapper">
+            <TextField
+              onChange={(e) => setTitUz(e.target.value)}
+              defaultValue={titUz}
+              className="elontitleinput"
+              id="outlined-basic"
+              label="titleUz"
+              variant="outlined"
+            />
+            <TextField
+              onChange={(e) => setTitRu(e.target.value)}
+              defaultValue={titRu}
+              className="elontitleinput"
+              id="outlined-basic"
+              label="titleRu"
+              variant="outlined"
+            />
+            <TextField
+              onChange={(e) => setTitEn(e.target.value)}
+              defaultValue={titEn}
+              className="elontitleinput"
+              id="outlined-basic"
+              label="titleEn"
+              variant="outlined"
+            />
+            <TextField
+              onChange={(e) => setTitKr(e.target.value)}
+              defaultValue={titKr}
+              className="elontitleinput"
+              id="outlined-basic"
+              label="titleKr"
+              variant="outlined"
+            />
+          </div>
           <div className="elontitlewrapper">
             <TextField
               onChange={(e) => setTitleUz(e.target.value)}
@@ -351,7 +405,7 @@ const Kanferensiyalar = () => {
               defaultValue={dateUZ}
               className="elontitleinput"
               id="outlined-basic"
-              label="Ma'lumot Uz"
+              label="Kutilayotgan sana Uz"
               variant="outlined"
             />
             <TextField
@@ -359,7 +413,7 @@ const Kanferensiyalar = () => {
               defaultValue={dateRU}
               className="elontitleinput"
               id="outlined-basic"
-              label="Ma'lumot Ru"
+              label="Kutilayotgan sana Ru"
               variant="outlined"
             />
             <TextField
@@ -367,7 +421,7 @@ const Kanferensiyalar = () => {
               defaultValue={dateEN}
               className="elontitleinput"
               id="outlined-basic"
-              label="Ma'lumot En"
+              label="Kutilayotgan sana En"
               variant="outlined"
             />
             <TextField
@@ -375,7 +429,7 @@ const Kanferensiyalar = () => {
               defaultValue={dateKR}
               className="elontitleinput"
               id="outlined-basic"
-              label="Ma'lumot Kr"
+              label="Kutilayotgan sana Kr"
               variant="outlined"
             />
           </div>
@@ -434,15 +488,6 @@ const Kanferensiyalar = () => {
               className="elontitleinput"
               id="outlined-basic"
               label="Telefon raqam"
-              variant="outlined"
-            />
-            <TextField
-              style={{ width: "100%" }}
-              onChange={(e) => setSana(e.target.value)}
-              defaultValue={sana}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Sana"
               variant="outlined"
             />
           </div>

@@ -51,6 +51,9 @@ const Sidebar = () => {
               <NavLink className={"navlink"} to={"/aboutus"}>
                 <span>Filial haqida</span>
               </NavLink>
+              <NavLink className={"navlink"} to={"/hamkor"}>
+                <span>Hamkorlar</span>
+              </NavLink>
             </>
           )}
           <p onClick={() => setNews(!news)} className="sidebar__theme">
@@ -89,6 +92,9 @@ const Sidebar = () => {
               </NavLink>
               <NavLink className={"navlink"} to={"/vakansiya"}>
                 <span>Vakansiyalar</span>
+              </NavLink>
+              <NavLink className={"navlink"} to={"/korupsiya"}>
+                <span>Korupsiyaga qarishi kurashish</span>
               </NavLink>
             </>
           )}

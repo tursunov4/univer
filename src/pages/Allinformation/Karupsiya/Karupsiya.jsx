@@ -1,33 +1,24 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../../../components/sidebar/Sidebar";
-import Navbar from "../../../components/navbar/Navbar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import http from "../../../untils/axios";
 import { ToastContainer, toast } from "react-toastify";
-
+import Nizomtable from "../../../components/Allinfor/Nizomtable";
 import "react-toastify/dist/ReactToastify.css";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import MarkazhodimTable from "../../../components/Markaz/Markazhodimlar";
 const style = {
   position: "fixed",
   top: "50%",
   left: "50%",
-  height: "80vh",
   transform: "translate(-50%, -50%)",
   width: "80%",
   bgcolor: "background.paper",
   boxShadow: 24,
   border: "none",
   p: 4,
-  overflow: "auto",
 };
-const Markazhodimlar = () => {
+const Korupsiya = () => {
   const [refresh, setRefresh] = useState(false);
   const [modal, setModal] = useState(false);
   const [allData, setAlldata] = useState([]);
@@ -37,30 +28,12 @@ const Markazhodimlar = () => {
   const [titleUz, setTitleUz] = useState("");
   const [titleRu, setTitleRu] = useState("");
   const [titleKr, setTitleKr] = useState("");
-  const [degreeEN, setDegreeEN] = useState("");
-  const [degreeRU, setDegreeRU] = useState("");
-  const [degreeUZ, setDegreeUZ] = useState("");
-  const [degreeKR, setDegreeKR] = useState("");
-  const [dutiesEN, setDutiesEN] = useState("");
-  const [dutiesRU, setDutiesRU] = useState("");
-  const [dutiesUZ, setDutiesUZ] = useState("");
-  const [dutiesKR, setDutiesKR] = useState("");
   const [descriptionuz, setDescriptionuz] = useState("");
   const [descriptionru, setDescriptionru] = useState("");
   const [descriptionen, setDescriptionen] = useState("");
   const [descriptionkr, setDescriptionkr] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [facebook, setFacebook] = useState("");
-  const [telegram, setTelegram] = useState("");
-  const [twitter, setTwitter] = useState("");
-  const [skype, setSkype] = useState("");
-  const [likedin, setLinkedin] = useState("");
-  const [hodimslection, setHodimSelection] = useState("");
-  const [hodim, setHodim] = useState([]);
   const [edit, setEdit] = useState(false);
   const [editid, setEditId] = useState("");
-
   if (image) {
     const form = new FormData();
     form.append("image", image);
@@ -78,24 +51,6 @@ const Markazhodimlar = () => {
         console.log(err);
       });
   }
-  const getHodim = () => {
-    http
-      .get("/api/public/allCenterAndDepartments")
-      .then((res) => {
-        console.log(res.data);
-        setHodim(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const handleChange = (event) => {
-    setHodimSelection(event.target.value);
-  };
-  useEffect(() => {
-    getHodim();
-  }, []);
 
   const handleSubmit = () => {
     const arr = [];
@@ -104,32 +59,16 @@ const Markazhodimlar = () => {
     }
     if (edit) {
       http
-        .put(`/api/user/editCenterAndDepartmentsEmployees/${editid}`, {
-          hashid: arr?.at(-1),
-          fullNameKR: titleKr,
-          fullNameRU: titleRu,
-          fullNameUZ: titleUz,
-          fullNameEN: titleEn,
-          biographyEN: descriptionen,
-          biographyKR: descriptionkr,
-          biographyRU: descriptionru,
-          biographyUZ: descriptionuz,
-          dutiesEN: dutiesEN,
-          dutiesKR: dutiesKR,
-          dutiesRU: dutiesRU,
-          dutiesUZ: dutiesUZ,
-          email: email,
-          positionEN: degreeEN,
-          positionKR: degreeKR,
-          positionRU: degreeRU,
-          positionUZ: degreeUZ,
-          linkedln: likedin,
-          phoneNumber: phone,
-          skype: skype,
-          telegramlink: telegram,
-          twitterlink: twitter,
-          facebooklink: facebook,
-          centerAndDepartmentId: hodimslection,
+        .put(`/api/user/editAnticorDocument/${editid}`, {
+          hashId: arr?.at(-1),
+          nameKR: titleKr,
+          nameRU: titleRu,
+          nameUZ: titleUz,
+          nameEN: titleEn,
+          descriptionEN: descriptionen,
+          descriptionKR: descriptionkr,
+          descriptionRU: descriptionru,
+          descriptionUZ: descriptionuz,
         })
         .then((res) => {
           console.log(res.data);
@@ -188,32 +127,16 @@ const Markazhodimlar = () => {
         });
     } else {
       http
-        .post("/api/user/addCenterAndDepartmentsEmployees", {
-          hashid: arr?.at(-1),
-          fullNameKR: titleKr,
-          fullNameRU: titleRu,
-          fullNameUZ: titleUz,
-          fullNameEN: titleEn,
-          biographyEN: descriptionen,
-          biographyKR: descriptionkr,
-          biographyRU: descriptionru,
-          biographyUZ: descriptionuz,
-          dutiesEN: dutiesEN,
-          dutiesKR: dutiesKR,
-          dutiesRU: dutiesRU,
-          dutiesUZ: dutiesUZ,
-          email: email,
-          positionEN: degreeEN,
-          positionKR: degreeKR,
-          positionRU: degreeRU,
-          positionUZ: degreeUZ,
-          linkedln: likedin,
-          phoneNumber: phone,
-          skype: skype,
-          telegramlink: telegram,
-          twitterlink: twitter,
-          facebooklink: facebook,
-          centerAndDepartmentId: hodimslection,
+        .post("/api/user/addAnticorDocument", {
+          hashId: arr?.at(-1),
+          nameKR: titleKr,
+          nameRU: titleRu,
+          nameUZ: titleUz,
+          nameEN: titleEn,
+          descriptionEN: descriptionen,
+          descriptionKR: descriptionkr,
+          descriptionRU: descriptionru,
+          descriptionUZ: descriptionuz,
         })
         .then((res) => {
           console.log(res.data);
@@ -285,26 +208,10 @@ const Markazhodimlar = () => {
     setDescriptionru("");
     setDescriptionuz("");
     setDescriptionkr("");
-    setDegreeRU("");
-    setDegreeKR("");
-    setDegreeUZ("");
-    setDegreeEN("");
-    setDutiesRU("");
-    setDutiesKR("");
-    setDutiesUZ("");
-    setDutiesEN("");
-    setEmail("");
-    setLinkedin("");
-    setPhone("");
-    setSkype("");
-    setTelegram("");
-    setTwitter("");
-    setFacebook("");
-    setHodimSelection("");
   };
   const getData = () => {
     http
-      .get("/api/public/allCenterAndDepartmentsEmployees")
+      .get("api/public/allAnticorDocument")
       .then((res) => {
         console.log(res.data);
         setAlldata(res.data);
@@ -315,7 +222,7 @@ const Markazhodimlar = () => {
   };
   const deleteData = (id) => {
     http
-      .delete(`/api/user/deleteCenterAndDepartmentsEmployees/${id}`)
+      .delete(`/api/user/deleteAnticorDocument/${id}`)
       .then((res) => {
         console.log(res.data);
         if (res.data?.success) {
@@ -352,30 +259,14 @@ const Markazhodimlar = () => {
     setModal(true);
     setEditId(data?.id);
     setImageArr([data?.file]);
-    setTitleRu(data?.fullNameRU);
-    setTitleKr(data?.fullNameKR);
-    setTitleUz(data?.fullNameUZ);
-    setTitleEn(data?.fullNameEN);
-    setDegreeRU(data?.positionRU);
-    setDegreeKR(data?.positionKR);
-    setDegreeUZ(data?.positionUZ);
-    setDegreeEN(data?.positionEN);
-    setDutiesRU(data?.dutiesRU);
-    setDutiesKR(data?.dutiesKR);
-    setDutiesUZ(data?.dutiesUZ);
-    setDutiesEN(data?.dutiesEN);
-    setEmail(data?.email);
-    setLinkedin(data?.linkedln);
-    setPhone(data?.phoneNumber);
-    setSkype(data?.skype);
-    setTelegram(data?.telegramlink);
-    setTwitter(data?.twitterlink);
-    setFacebook(data?.facebooklink);
-    setDescriptionen(data?.biographyEN);
-    setDescriptionru(data?.biographyRU);
-    setDescriptionuz(data?.biographyUZ);
-    setDescriptionkr(data?.biographyKR);
-    setHodimSelection(data?.centerAndDepartmentId);
+    setTitleRu(data?.nameRU);
+    setTitleKr(data?.nameKR);
+    setTitleUz(data?.nameUZ);
+    setTitleEn(data?.nameEN);
+    setDescriptionen(data?.descriptionEN);
+    setDescriptionru(data?.descriptionRU);
+    setDescriptionuz(data?.descriptionUZ);
+    setDescriptionkr(data?.descriptionKR);
   };
 
   useEffect(() => {
@@ -384,13 +275,12 @@ const Markazhodimlar = () => {
   return (
     <>
       <ToastContainer />
-
       <div className="add__newbtn">
         <Button onClick={() => setModal(true)} variant="contained">
           Add new
         </Button>
       </div>
-      <MarkazhodimTable
+      <Nizomtable
         handleEdit={handleEdit}
         data={allData}
         handleDelete={deleteData}
@@ -403,16 +293,14 @@ const Markazhodimlar = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <h2 className="elontitle">
-            Markaz va bo'lim hodim {edit ? "tahrirlash" : "qo'shish"}
-          </h2>
+          <h2 className="elontitle">Korupsiyaga qarshi kurashish</h2>
           <div className="elontitlewrapper">
             <TextField
               onChange={(e) => setTitleUz(e.target.value)}
               defaultValue={titleUz}
               className="elontitleinput"
               id="outlined-basic"
-              label="fullNameUz"
+              label="TitleUz"
               variant="outlined"
             />
             <TextField
@@ -420,7 +308,7 @@ const Markazhodimlar = () => {
               defaultValue={titleRu}
               className="elontitleinput"
               id="outlined-basic"
-              label="fullNameRu"
+              label="TitleRu"
               variant="outlined"
             />
             <TextField
@@ -428,7 +316,7 @@ const Markazhodimlar = () => {
               defaultValue={titleEn}
               className="elontitleinput"
               id="outlined-basic"
-              label="fullNameEn"
+              label="TitleEn"
               variant="outlined"
             />
             <TextField
@@ -436,157 +324,7 @@ const Markazhodimlar = () => {
               defaultValue={titleKr}
               className="elontitleinput"
               id="outlined-basic"
-              label="fullNameKr"
-              variant="outlined"
-            />
-          </div>
-          <div className="elontitlewrapper">
-            <TextField
-              onChange={(e) => setDegreeUZ(e.target.value)}
-              defaultValue={degreeUZ}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="positionUZ"
-              variant="outlined"
-            />
-            <TextField
-              onChange={(e) => setDegreeRU(e.target.value)}
-              defaultValue={degreeRU}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="positionRu"
-              variant="outlined"
-            />
-            <TextField
-              onChange={(e) => setDegreeEN(e.target.value)}
-              defaultValue={degreeEN}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="positionEn"
-              variant="outlined"
-            />
-            <TextField
-              onChange={(e) => setDegreeKR(e.target.value)}
-              defaultValue={degreeKR}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="positionKr"
-              variant="outlined"
-            />
-          </div>
-          <div className="elontitlewrapper">
-            <TextField
-              onChange={(e) => setDutiesUZ(e.target.value)}
-              defaultValue={dutiesUZ}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="dutiesUZ"
-              variant="outlined"
-            />
-            <TextField
-              onChange={(e) => setDutiesRU(e.target.value)}
-              defaultValue={dutiesRU}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="dutiesRu"
-              variant="outlined"
-            />
-            <TextField
-              onChange={(e) => setDutiesEN(e.target.value)}
-              defaultValue={dutiesEN}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="dutiesEn"
-              variant="outlined"
-            />
-            <TextField
-              onChange={(e) => setDutiesKR(e.target.value)}
-              defaultValue={dutiesKR}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="dutiesKr"
-              variant="outlined"
-            />
-          </div>
-          <div className="elontitlewrapper">
-            <TextField
-              onChange={(e) => setFacebook(e.target.value)}
-              defaultValue={facebook}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Facebook link"
-              variant="outlined"
-            />
-            <TextField
-              onChange={(e) => setTelegram(e.target.value)}
-              defaultValue={telegram}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Telegram link"
-              variant="outlined"
-            />
-            <TextField
-              onChange={(e) => setTwitter(e.target.value)}
-              defaultValue={twitter}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Twitter link"
-              variant="outlined"
-            />
-            <TextField
-              onChange={(e) => setSkype(e.target.value)}
-              defaultValue={skype}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Skype link"
-              variant="outlined"
-            />
-          </div>
-          <div className="elontitlewrapper">
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">
-                {" "}
-                Markaz nomi
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={hodimslection}
-                label="Age"
-                onChange={handleChange}
-              >
-                {hodim?.map((item, index) => (
-                  <MenuItem key={index} value={item.id}>
-                    {item.nameUZ}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <TextField
-              style={{ width: "100%" }}
-              onChange={(e) => setLinkedin(e.target.value)}
-              defaultValue={likedin}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Linkdin link"
-              variant="outlined"
-            />
-            <TextField
-              style={{ width: "100%" }}
-              onChange={(e) => setEmail(e.target.value)}
-              defaultValue={email}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Email"
-              variant="outlined"
-            />
-            <TextField
-              style={{ width: "100%" }}
-              onChange={(e) => setPhone(e.target.value)}
-              defaultValue={phone}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Telefon raqam"
+              label="TitleKr"
               variant="outlined"
             />
           </div>
@@ -594,7 +332,7 @@ const Markazhodimlar = () => {
             <TextField
               className="elontextarea"
               id="outlined-multiline-static"
-              label="biographyUz"
+              label=" DescribtionUz"
               defaultValue={descriptionuz}
               onChange={(e) => setDescriptionuz(e.target.value)}
               multiline
@@ -612,7 +350,7 @@ const Markazhodimlar = () => {
             <TextField
               className="elontextarea"
               id="outlined-multiline-static"
-              label="biographyEn"
+              label="DescribtionEng"
               multiline
               defaultValue={descriptionen}
               onChange={(e) => setDescriptionen(e.target.value)}
@@ -621,7 +359,7 @@ const Markazhodimlar = () => {
             <TextField
               className="elontextarea"
               id="outlined-multiline-static"
-              label="biographyKr"
+              label="DescribtionKr"
               multiline
               defaultValue={descriptionkr}
               onChange={(e) => setDescriptionkr(e.target.value)}
@@ -641,9 +379,11 @@ const Markazhodimlar = () => {
                 }
               />
               <div className="eloninput__btn">
-                {imagearr.length > 0 ? `Image tanlash` : "Image tanlash"}
+                {imagearr.length > 0 ? `Fayl tanlash` : "Fayl tanlash"}
               </div>
-              <span>Faqat bitta fayl qushish mumkin</span>
+              <span>
+                Faqat bitta fayl qushish mumkin. Fayl tanlash majburiy
+              </span>
             </label>
           </div>
           <div className="image__orginalname">
@@ -665,4 +405,4 @@ const Markazhodimlar = () => {
   );
 };
 
-export default Markazhodimlar;
+export default Korupsiya;

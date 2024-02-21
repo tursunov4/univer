@@ -275,7 +275,7 @@ const Kafederalarmain = () => {
 
   const getMoliyaType = () => {
     http
-      .get("/api/public/allLeaderShipstatusDekanat")
+      .get("/api/public/allLeaderShipstatusKafedra")
       .then((res) => {
         console.log(res.data);
         setMoliyatype(res.data);

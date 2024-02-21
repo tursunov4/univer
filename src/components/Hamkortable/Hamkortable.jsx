@@ -88,11 +88,11 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-export default function Uquvtable({ handleEdit, handleDelete, data }) {
+export default function Hamkortable({ handleEdit, handleDelete, data }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data?.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -118,23 +118,12 @@ export default function Uquvtable({ handleEdit, handleDelete, data }) {
         style={{ maxWidth: "95%", margin: "20px auto" }}
         component={Paper}
       >
-        <Table aria-label="custom pagination table">
+        <Table sx={{ minWidth: "95%" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
-              <TableCell>
-                {lan === "uz" && "nameUZ"}
-                {lan === "ru" && "nameRU"}
-                {lan === "en" && "nameEN"}
-                {lan === "kr" && "nameKR"}
-              </TableCell>
-              <TableCell>
-                {lan === "uz" && "informationUZ"}
-                {lan === "ru" && "informationRU"}
-                {lan === "en" && "informationEN"}
-                {lan === "kr" && "informationKR"}
-              </TableCell>
+              <TableCell>Link</TableCell>
 
-              <TableCell>Fayl</TableCell>
+              <TableCell>Icon</TableCell>
               <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
@@ -146,22 +135,14 @@ export default function Uquvtable({ handleEdit, handleDelete, data }) {
                   page * rowsPerPage + rowsPerPage
                 )
               : data
-            )?.map((row, index) => (
+            ).map((row, index) => (
               <TableRow key={index}>
                 <TableCell component="th" scope="row">
-                  {lan === "en" && row?.nameEN}
-                  {lan === "ru" && row?.nameRU}
-                  {lan === "uz" && row?.nameUZ}
-                  {lan === "kr" && row?.nameKR}
+                  {row?.link}
                 </TableCell>
+
                 <TableCell component="th" scope="row">
-                  {lan === "en" && row?.informationEN}
-                  {lan === "ru" && row?.informationRU}
-                  {lan === "uz" && row?.informationUZ}
-                  {lan === "kr" && row?.informationKR}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  <p key={index}>{row?.file?.orginalName}</p>
+                  <p key={index}>{row?.icon?.orginalName}</p>
                 </TableCell>
                 <TableCell>
                   <Button

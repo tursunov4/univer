@@ -121,14 +121,14 @@ export default function Generalinfortable({ handleEdit, handleDelete, data }) {
         <Table sx={{ minWidth: "95%" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
-              <TableCell>auditoriumNumber</TableCell>
-              <TableCell>doktorantNumber</TableCell>
-              <TableCell>facultyNumber</TableCell>
-              <TableCell>fieldsofStudyNumber</TableCell>
-              <TableCell>independentResearchersNumber</TableCell>
-              <TableCell>jointTrainingNumber</TableCell>
-              <TableCell>proffessorNumber</TableCell>
-              <TableCell>studentsNumber</TableCell>
+              <TableCell>Auditoriyalar soni</TableCell>
+              <TableCell>Doktorantlar soni</TableCell>
+              <TableCell>Fakultetlar soni</TableCell>
+              <TableCell>Taʼlim yo‘nalishlari</TableCell>
+              <TableCell>Mustaqil tadqiqotchilar</TableCell>
+              <TableCell>Qo‘shma taʼlim dasturlari</TableCell>
+              <TableCell>Professor-o‘qituvchilar</TableCell>
+              <TableCell>Talabalar soni</TableCell>
               <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
+import Sidebar from "../../../components/sidebar/Sidebar";
+import Navbar from "../../../components/navbar/Navbar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import http from "../../../untils/axios";
 import { ToastContainer, toast } from "react-toastify";
+import Nizomtable from "../../../components/Allinfor/Nizomtable";
+import Hamkortable from "../../../components/Hamkortable/Hamkortable";
 import "react-toastify/dist/ReactToastify.css";
-import Generalinfortable from "../../../components/Generalinfor/Generalinfortable";
 const style = {
   position: "fixed",
   top: "50%",
@@ -18,20 +21,13 @@ const style = {
   border: "none",
   p: 4,
 };
-const MainInfor = () => {
+const Hamkorlar = () => {
   const [refresh, setRefresh] = useState(false);
   const [modal, setModal] = useState(false);
   const [allData, setAlldata] = useState([]);
   const [imagearr, setImageArr] = useState([]);
   const [image, setImage] = useState("");
-  const [descriptionuz, setDescriptionuz] = useState("");
-  const [descriptionru, setDescriptionru] = useState("");
-  const [descriptionen, setDescriptionen] = useState("");
-  const [descriptionkr, setDescriptionkr] = useState("");
   const [titleEn, setTitleEn] = useState("");
-  const [titleUz, setTitleUz] = useState("");
-  const [titleRu, setTitleRu] = useState("");
-  const [titleKr, setTitleKr] = useState("");
 
   const [edit, setEdit] = useState(false);
   const [editid, setEditId] = useState("");
@@ -60,15 +56,9 @@ const MainInfor = () => {
     }
     if (edit) {
       http
-        .put(`/api/user/editGeneralInformat/${editid}`, {
-          proffessorNumber: descriptionen,
-          studentsNumber: descriptionkr,
-          jointTrainingNumber: descriptionru,
-          independentResearchersNumber: descriptionuz,
-          fieldsofStudyNumber: titleKr,
-          doktorantNumber: titleRu,
-          auditoriumNumber: titleUz,
-          facultyNumber: titleEn,
+        .put(`/api/user/editpartner/${editid}`, {
+          icon: arr?.at(-1),
+          link: titleEn,
         })
         .then((res) => {
           console.log(res.data);
@@ -127,15 +117,9 @@ const MainInfor = () => {
         });
     } else {
       http
-        .post("/api/user/GeneralInformatsave", {
-          proffessorNumber: descriptionen,
-          studentsNumber: descriptionkr,
-          jointTrainingNumber: descriptionru,
-          independentResearchersNumber: descriptionuz,
-          fieldsofStudyNumber: titleKr,
-          doktorantNumber: titleRu,
-          auditoriumNumber: titleUz,
-          facultyNumber: titleEn,
+        .post("/api/user/addpartner", {
+          icon: arr?.at(-1),
+          link: titleEn,
         })
         .then((res) => {
           console.log(res.data);
@@ -198,18 +182,13 @@ const MainInfor = () => {
     setModal(false);
     setEditId("");
     setEdit(false);
-    setDescriptionen("");
-    setDescriptionru("");
-    setDescriptionuz("");
-    setDescriptionkr("");
-    setTitleRu("");
-    setTitleKr("");
-    setTitleUz("");
+    setImageArr([]);
+
     setTitleEn("");
   };
   const getData = () => {
     http
-      .get("/api/public/allGeneralInformat")
+      .get("api/public/allpartner")
       .then((res) => {
         console.log(res.data);
         setAlldata(res.data);
@@ -220,7 +199,7 @@ const MainInfor = () => {
   };
   const deleteData = (id) => {
     http
-      .delete(`/api/user/deleteGeneralInformat/${id}`)
+      .delete(`/api/user/deletepartner/${id}`)
       .then((res) => {
         console.log(res.data);
         if (res.data?.success) {
@@ -256,14 +235,8 @@ const MainInfor = () => {
     setEdit(true);
     setModal(true);
     setEditId(data?.id);
-    setDescriptionen(data?.proffessorNumber);
-    setDescriptionru(data?.jointTrainingNumber);
-    setDescriptionuz(data?.independentResearchersNumber);
-    setDescriptionkr(data?.studentsNumber);
-    setTitleRu(data?.doktorantNumber);
-    setTitleKr(data?.fieldsofStudyNumber);
-    setTitleUz(data?.auditoriumNumber);
-    setTitleEn(data?.facultyNumber);
+    setImageArr([data?.icon]);
+    setTitleEn(data?.link);
   };
 
   useEffect(() => {
@@ -273,13 +246,11 @@ const MainInfor = () => {
     <>
       <ToastContainer />
       <div className="add__newbtn">
-        {allData.length === 0 && (
-          <Button onClick={() => setModal(true)} variant="contained">
-            Add new
-          </Button>
-        )}
+        <Button onClick={() => setModal(true)} variant="contained">
+          Add new
+        </Button>
       </div>
-      <Generalinfortable
+      <Hamkortable
         handleEdit={handleEdit}
         data={allData}
         handleDelete={deleteData}
@@ -292,82 +263,49 @@ const MainInfor = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <h2 className="elontitle">Umumiy malumotlar</h2>
+          <h2 className="elontitle">Hamkorlar</h2>
           <div className="elontitlewrapper">
             <TextField
-              onChange={(e) => setTitleUz(e.target.value)}
-              defaultValue={titleUz}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Auditoriyalar soni"
-              variant="outlined"
-            />
-            <TextField
-              onChange={(e) => setTitleRu(e.target.value)}
-              defaultValue={titleRu}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Doktorantlar soni"
-              variant="outlined"
-            />
-            <TextField
+              style={{ width: "100%" }}
               onChange={(e) => setTitleEn(e.target.value)}
               defaultValue={titleEn}
               className="elontitleinput"
               id="outlined-basic"
-              label="Fakultetlar soni"
-              variant="outlined"
-            />
-            <TextField
-              onChange={(e) => setTitleKr(e.target.value)}
-              defaultValue={titleKr}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Taʼlim yo‘nalishlari"
+              label="Link"
               variant="outlined"
             />
           </div>
-          <div className="elontitlewrapper">
-            <TextField
-              onChange={(e) => setDescriptionuz(e.target.value)}
-              defaultValue={descriptionuz}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Mustaqil tadqiqotchilar"
-              variant="outlined"
-            />
-            <TextField
-              onChange={(e) => setDescriptionru(e.target.value)}
-              defaultValue={descriptionru}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Qo‘shma taʼlim dasturlari"
-              variant="outlined"
-            />
-            <TextField
-              onChange={(e) => setDescriptionen(e.target.value)}
-              defaultValue={descriptionen}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Professor-o‘qituvchilar"
-              variant="outlined"
-            />
-            <TextField
-              onChange={(e) => setDescriptionkr(e.target.value)}
-              defaultValue={descriptionkr}
-              className="elontitleinput"
-              id="outlined-basic"
-              label="Talabalar soni"
-              variant="outlined"
-            />
+
+          <div className="elonimg">
+            <label className="eloninput">
+              <input
+                onChange={(e) => setImage(e.target.files[0])}
+                type="file"
+                placeholder={
+                  imagearr.length > 0
+                    ? `выбраны ${imagearr.length} - файла`
+                    : "Загрузить файл"
+                }
+              />
+              <div className="eloninput__btn">
+                {imagearr.length > 0 ? `Icon tanlash` : "Icon tanlash"}
+              </div>
+              <span>
+                Faqat bitta fayl qushish mumkin. Fayl tanlash majburiy
+              </span>
+            </label>
           </div>
+          <div className="image__orginalname">
+            {imagearr?.at(-1)?.orginalName}
+          </div>
+
           <div className="submitwrap">
             <Button
               onClick={handleSubmit}
               className="sumbitbuttonelon"
               variant="contained"
             >
-              {edit ? "Tahrirlash" : "Qo'shish"}
+              Qo'shish
             </Button>
           </div>
         </Box>
@@ -376,4 +314,4 @@ const MainInfor = () => {
   );
 };
 
-export default MainInfor;
+export default Hamkorlar;

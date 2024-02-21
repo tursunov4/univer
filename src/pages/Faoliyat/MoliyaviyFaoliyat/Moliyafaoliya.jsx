@@ -311,7 +311,7 @@ const Moliyafaoliyat = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <h2 className="elontitle">Bakalavryat</h2>
+          <h2 className="elontitle">Moliyaviy faoliyat</h2>
 
           <div className="elondescription">
             <TextField
@@ -352,7 +352,7 @@ const Moliyafaoliyat = () => {
             />
           </div>
           <div>
-            <FormControl fullWidth>
+            <FormControl style={{ marginTop: "20px" }} fullWidth>
               <InputLabel id="demo-simple-select-label">
                 Moliya faoliyat turi
               </InputLabel>

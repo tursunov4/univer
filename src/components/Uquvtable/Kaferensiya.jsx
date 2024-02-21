@@ -88,7 +88,7 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-export default function Uquvtable({ handleEdit, handleDelete, data }) {
+export default function Kanferensiyatable({ handleEdit, handleDelete, data }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const emptyRows =
@@ -118,23 +118,36 @@ export default function Uquvtable({ handleEdit, handleDelete, data }) {
         style={{ maxWidth: "95%", margin: "20px auto" }}
         component={Paper}
       >
-        <Table aria-label="custom pagination table">
+        <Table sx={{ width: "180vw" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
               <TableCell>
-                {lan === "uz" && "nameUZ"}
-                {lan === "ru" && "nameRU"}
-                {lan === "en" && "nameEN"}
-                {lan === "kr" && "nameKR"}
+                {lan === "uz" && "titleUZ"}
+                {lan === "ru" && "titleRU"}
+                {lan === "en" && "titleEN"}
+                {lan === "kr" && "titleKR"}
               </TableCell>
               <TableCell>
-                {lan === "uz" && "informationUZ"}
-                {lan === "ru" && "informationRU"}
-                {lan === "en" && "informationEN"}
-                {lan === "kr" && "informationKR"}
+                {lan === "uz" && "addressUZ"}
+                {lan === "ru" && "addressRU"}
+                {lan === "en" && "addressEN"}
+                {lan === "kr" && "addressKR"}
+              </TableCell>
+              <TableCell>Telefon Raqam</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>
+                {lan === "uz" && "Kutilayotgan sana UZ"}
+                {lan === "ru" && "Kutilayotgan sana RU"}
+                {lan === "en" && "Kutilayotgan sana EN"}
+                {lan === "kr" && "Kutilayotgan sana KR"}
+              </TableCell>
+              <TableCell>
+                {lan === "uz" && "descriptionUZ"}
+                {lan === "ru" && "descriptionRU"}
+                {lan === "en" && "descriptionEN"}
+                {lan === "kr" && "descriptionKR"}
               </TableCell>
 
-              <TableCell>Fayl</TableCell>
               <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
@@ -149,20 +162,36 @@ export default function Uquvtable({ handleEdit, handleDelete, data }) {
             )?.map((row, index) => (
               <TableRow key={index}>
                 <TableCell component="th" scope="row">
-                  {lan === "en" && row?.nameEN}
-                  {lan === "ru" && row?.nameRU}
-                  {lan === "uz" && row?.nameUZ}
-                  {lan === "kr" && row?.nameKR}
+                  {lan === "en" && row?.titleEN}
+                  {lan === "ru" && row?.titleRU}
+                  {lan === "uz" && row?.titleUZ}
+                  {lan === "kr" && row?.titleKR}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {lan === "en" && row?.informationEN}
-                  {lan === "ru" && row?.informationRU}
-                  {lan === "uz" && row?.informationUZ}
-                  {lan === "kr" && row?.informationKR}
+                  {lan === "en" && row?.addressEN}
+                  {lan === "ru" && row?.addressRU}
+                  {lan === "uz" && row?.addressUZ}
+                  {lan === "kr" && row?.addressKR}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <p key={index}>{row?.file?.orginalName}</p>
+                  {row?.phone}
                 </TableCell>
+                <TableCell component="th" scope="row">
+                  {row?.email}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {lan === "en" && row?.dateEN}
+                  {lan === "ru" && row?.dateRU}
+                  {lan === "uz" && row?.dateUZ}
+                  {lan === "kr" && row?.dateKR}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {lan === "en" && row?.descriptionEN}
+                  {lan === "ru" && row?.descriptionRU}
+                  {lan === "uz" && row?.descriptionUZ}
+                  {lan === "kr" && row?.descriptionKR}
+                </TableCell>
+
                 <TableCell>
                   <Button
                     onClick={() => handleEdit(row)}

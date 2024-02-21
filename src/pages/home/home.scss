@@ -1,5 +1,8 @@
 .home {
   display: flex;
+  .linesdes {
+    width: 500px !important;
+  }
 
   .homeContainer {
     flex: 6;
@@ -29,7 +32,7 @@
     }
   }
 }
-.add__newbtn{
+.add__newbtn {
   margin-top: 20px;
   margin-right: 2.5%;
   display: flex;
