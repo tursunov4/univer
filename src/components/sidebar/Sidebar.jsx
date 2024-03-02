@@ -25,7 +25,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">lamadmin</span>
+          <span className="logo">Admin panel</span>
         </Link>
       </div>
       <hr />
@@ -121,6 +121,9 @@ const Sidebar = () => {
               </NavLink>
               <NavLink className={"navlink"} to={"/kafederamain"}>
                 <span>Kafederalar </span>
+              </NavLink>
+              <NavLink className={"navlink"} to={"/employe"}>
+                <span>Hodimlar</span>
               </NavLink>
               <NavLink className={"navlink"} to={"/markazcontrol"}>
                 <span>Markaz va bo'limlar</span>

@@ -300,7 +300,7 @@ const Vakansiyalar = () => {
               defaultValue={titleUz}
               className="elontitleinput"
               id="outlined-basic"
-              label="TitleUz"
+              label="Bo'lim nomiUz"
               variant="outlined"
             />
             <TextField
@@ -308,7 +308,7 @@ const Vakansiyalar = () => {
               defaultValue={titleRu}
               className="elontitleinput"
               id="outlined-basic"
-              label="TitleRu"
+              label="Bo'lim nomiRu"
               variant="outlined"
             />
             <TextField
@@ -316,7 +316,7 @@ const Vakansiyalar = () => {
               defaultValue={titleEn}
               className="elontitleinput"
               id="outlined-basic"
-              label="TitleEn"
+              label="Bo'lim nomiEn"
               variant="outlined"
             />
             <TextField
@@ -324,7 +324,7 @@ const Vakansiyalar = () => {
               defaultValue={titleKr}
               className="elontitleinput"
               id="outlined-basic"
-              label="TitleKr"
+              label="Bo'lim nomiKr"
               variant="outlined"
             />
           </div>

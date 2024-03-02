@@ -88,11 +88,11 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-export default function Kanferensiyatable({ handleEdit, handleDelete, data }) {
+export default function Kafedaratable({ handleEdit, handleDelete, data }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data?.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -115,38 +115,50 @@ export default function Kanferensiyatable({ handleEdit, handleDelete, data }) {
         </ButtonGroup>
       </div>
       <TableContainer
-        style={{ maxWidth: "95%", margin: "20px auto" }}
+        className="tablecontainer"
+        style={{ margin: "20px auto" }}
         component={Paper}
       >
-        <Table sx={{ width: "120vw" }} aria-label="custom pagination table">
+        <Table style={{ width: "180vw" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
               <TableCell>
-                {lan === "uz" && "titleUZ"}
-                {lan === "ru" && "titleRU"}
-                {lan === "en" && "titleEN"}
-                {lan === "kr" && "titleKR"}
+                {lan === "uz" && "fullNameUZ"}
+                {lan === "ru" && "fullNameRU"}
+                {lan === "en" && "fullNameEN"}
+                {lan === "kr" && "fullNameKR"}
               </TableCell>
               <TableCell>
-                {lan === "uz" && "addressUZ"}
-                {lan === "ru" && "addressRU"}
-                {lan === "en" && "addressEN"}
-                {lan === "kr" && "addressKR"}
+                {lan === "uz" && "degreeUZ"}
+                {lan === "ru" && "degreeRU"}
+                {lan === "en" && "degreeEN"}
+                {lan === "kr" && "degreeKR"}
               </TableCell>
-              <TableCell>Telefon Raqam</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>
-                {lan === "uz" && "Kutilayotgan sana UZ"}
-                {lan === "ru" && "Kutilayotgan sana RU"}
-                {lan === "en" && "Kutilayotgan sana EN"}
-                {lan === "kr" && "Kutilayotgan sana KR"}
+              <TableCell
+                className="linedesc"
+                style={{ width: "500px !important" }}
+              >
+                {lan === "uz" && "dutiesUZ"}
+                {lan === "ru" && "dutiesRU"}
+                {lan === "en" && "dutiesEN"}
+                {lan === "kr" && "dutiesKR"}
               </TableCell>
-              <TableCell>
-                {lan === "uz" && "descriptionUZ"}
-                {lan === "ru" && "descriptionRU"}
-                {lan === "en" && "descriptionEN"}
-                {lan === "kr" && "descriptionKR"}
+              <TableCell>email</TableCell>
+              <TableCell>linkedin</TableCell>
+              <TableCell>phoneNumber</TableCell>
+              <TableCell>skype</TableCell>
+
+              <TableCell>telegramlink</TableCell>
+              <TableCell>twitterlink</TableCell>
+              <TableCell>facebooklink</TableCell>
+              <TableCell className="linesdes">
+                {lan === "uz" && "biographyUZ"}
+                {lan === "ru" && "biographyRU"}
+                {lan === "en" && "biographyEN"}
+                {lan === "kr" && "biographyKR"}
               </TableCell>
+
+              <TableCell>Fayl</TableCell>
 
               <TableCell>Action</TableCell>
             </TableRow>
@@ -159,37 +171,21 @@ export default function Kanferensiyatable({ handleEdit, handleDelete, data }) {
                   page * rowsPerPage + rowsPerPage
                 )
               : data
-            )?.map((row, index) => (
+            ).map((row, index) => (
               <TableRow key={index}>
                 <TableCell component="th" scope="row">
-                  {lan === "en" && row?.titleEN}
-                  {lan === "ru" && row?.titleRU}
-                  {lan === "uz" && row?.titleUZ}
-                  {lan === "kr" && row?.titleKR}
+                  {lan === "en" && row?.fullNameEN}
+                  {lan === "ru" && row?.fullNameRU}
+                  {lan === "uz" && row?.fullNameUZ}
+                  {lan === "kr" && row?.fullNameKR}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {lan === "en" && row?.addressEN}
-                  {lan === "ru" && row?.addressRU}
-                  {lan === "uz" && row?.addressUZ}
-                  {lan === "kr" && row?.addressKR}
+                  {lan === "en" && row?.degreeEN}
+                  {lan === "ru" && row?.degreeRU}
+                  {lan === "uz" && row?.degreeUZ}
+                  {lan === "kr" && row?.degreeKR}
                 </TableCell>
-                <TableCell component="th" scope="row">
-                  {row?.phone}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {row?.email}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {lan === "en" && row?.dateEN}
-                  {lan === "ru" && row?.dateRU}
-                  {lan === "uz" && row?.dateUZ}
-                  {lan === "kr" && row?.dateKR}
-                </TableCell>
-                <TableCell
-                  style={{ width: "400px" }}
-                  component="th"
-                  scope="row"
-                >
+                <TableCell className="linesdes" component="th" scope="row">
                   <p
                     style={{
                       width: "400px !important",
@@ -198,11 +194,78 @@ export default function Kanferensiyatable({ handleEdit, handleDelete, data }) {
                       padding: "10px",
                     }}
                   >
-                    {lan === "en" && row?.descriptionEN}
-                    {lan === "ru" && row?.descriptionRU}
-                    {lan === "uz" && row?.descriptionUZ}
-                    {lan === "kr" && row?.descriptionKR}
+                    {lan === "en" && row?.dutiesEN}
+                    {lan === "ru" && row?.dutiesRU}
+                    {lan === "uz" && row?.dutiesUZ}
+                    {lan === "kr" && row?.dutiesKR}
                   </p>
+                </TableCell>
+                <TableCell
+                  style={{ wordBreak: "bread" }}
+                  component="th"
+                  scope="row"
+                >
+                  {row?.email}
+                </TableCell>
+                <TableCell
+                  style={{ wordBreak: "bread" }}
+                  component="th"
+                  scope="row"
+                >
+                  {row?.linkedln}
+                </TableCell>
+                <TableCell
+                  style={{ wordBreak: "bread" }}
+                  component="th"
+                  scope="row"
+                >
+                  {row?.phoneNumber}
+                </TableCell>
+                <TableCell
+                  style={{ wordBreak: "bread" }}
+                  component="th"
+                  scope="row"
+                >
+                  {row?.skype}
+                </TableCell>
+                <TableCell
+                  style={{ wordBreak: "bread" }}
+                  component="th"
+                  scope="row"
+                >
+                  {row?.telegramlink}
+                </TableCell>
+                <TableCell
+                  style={{ wordBreak: "bread" }}
+                  component="th"
+                  scope="row"
+                >
+                  {row?.twitterlink}
+                </TableCell>
+                <TableCell
+                  style={{ wordBreak: "bread" }}
+                  component="th"
+                  scope="row"
+                >
+                  {row?.facebooklink}
+                </TableCell>
+                <TableCell component="th">
+                  <p
+                    style={{
+                      width: "400px !important",
+                      height: "250px",
+                      overflowY: "auto",
+                      padding: "10px",
+                    }}
+                  >
+                    {lan === "en" && row?.biographyEN}
+                    {lan === "ru" && row?.biographyRU}
+                    {lan === "uz" && row?.biographyUZ}
+                    {lan === "kr" && row?.biographyKR}
+                  </p>
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {row?.file?.orginalName}
                 </TableCell>
 
                 <TableCell>
@@ -214,14 +277,6 @@ export default function Kanferensiyatable({ handleEdit, handleDelete, data }) {
                     href="#outlined-buttons"
                   >
                     Edit
-                  </Button>
-                  <Button
-                    onClick={() => handleDelete(row.id)}
-                    size="small"
-                    variant="outlined"
-                    color="error"
-                  >
-                    Delete
                   </Button>
                 </TableCell>
               </TableRow>

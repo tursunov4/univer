@@ -50,6 +50,7 @@ import Layout from "./components/Layout/Layout";
 import Ilmiyjurnal from "./pages/Faoliyat/Ilmiyjurnal/Ilmiyjurnal";
 import Korupsiya from "./pages/Allinformation/Karupsiya/Karupsiya";
 import Hamkorlar from "./pages/Mainpage/Hamkor/Hamkor";
+import Empolye from "./pages/Tuzilma/Empolye/Empolye";
 function App() {
   const { darkMode } = useContext(DarkModeContext);
 
@@ -132,6 +133,7 @@ function App() {
               <Route path="/changepassword" element={<ChangePassword />} />
               <Route path="/korupsiya" element={<Korupsiya />} />
               <Route path="/hamkor" element={<Hamkorlar />} />
+              <Route path="/employe" element={<Empolye />} />
             </Route>
           </Route>
         </Routes>

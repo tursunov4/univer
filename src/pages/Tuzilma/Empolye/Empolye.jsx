@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
+import Fakultettable from "../../../components/Falkultet/Fakultettable";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
@@ -8,6 +12,8 @@ import Box from "@mui/material/Box";
 import http from "../../../untils/axios";
 import { ToastContainer, toast } from "react-toastify";
 import Rahbartable from "../../../components/Rahbariyat/Kafedaratable";
+import Empolyetable from "../../../components/Rahbariyat/Empoloyetable";
+import Select from "@mui/material/Select";
 import "react-toastify/dist/ReactToastify.css";
 const style = {
   position: "fixed",
@@ -22,7 +28,7 @@ const style = {
   p: 4,
   overflow: "auto",
 };
-const Dekanat = () => {
+const Empolye = () => {
   const [refresh, setRefresh] = useState(false);
   const [modal, setModal] = useState(false);
   const [allData, setAlldata] = useState([]);
@@ -53,6 +59,8 @@ const Dekanat = () => {
   const [likedin, setLinkedin] = useState("");
   const [edit, setEdit] = useState(false);
   const [editid, setEditId] = useState("");
+  const [moliyatype, setMoliyatype] = useState([]);
+  const [moliyaSelection, setMoliyaSelection] = useState("");
   if (image) {
     const form = new FormData();
     form.append("image", image);
@@ -78,8 +86,8 @@ const Dekanat = () => {
     }
     if (edit) {
       http
-        .put(`/api/user/editLeadership/${editid}`, {
-          hashId: arr?.at(-1),
+        .put(`/api/user/editEmployee/${editid}`, {
+          hashid: arr?.at(-1),
           fullNameKR: titleKr,
           fullNameRU: titleRu,
           fullNameUZ: titleUz,
@@ -93,17 +101,17 @@ const Dekanat = () => {
           dutiesRU: dutiesRU,
           dutiesUZ: dutiesUZ,
           email: email,
-          degreeEN: degreeEN,
-          degreeKR: degreeKR,
-          degreeRU: degreeRU,
-          degreeUZ: degreeUZ,
+          positionEN: degreeEN,
+          positionKR: degreeKR,
+          positionRU: degreeRU,
+          positionUZ: degreeUZ,
           linkedln: likedin,
           phoneNumber: phone,
           skype: skype,
           telegramlink: telegram,
           twitterlink: twitter,
-          leadershipStatus: "DEKANAT",
           facebooklink: facebook,
+          departmentid: moliyaSelection,
         })
         .then((res) => {
           console.log(res.data);
@@ -162,8 +170,8 @@ const Dekanat = () => {
         });
     } else {
       http
-        .post("/api/user/addLeadership", {
-          hashId: arr?.at(-1),
+        .post("/api/user/addEmployee", {
+          hashid: arr?.at(-1),
           fullNameKR: titleKr,
           fullNameRU: titleRu,
           fullNameUZ: titleUz,
@@ -177,17 +185,17 @@ const Dekanat = () => {
           dutiesRU: dutiesRU,
           dutiesUZ: dutiesUZ,
           email: email,
-          degreeEN: degreeEN,
-          degreeKR: degreeKR,
-          degreeRU: degreeRU,
-          degreeUZ: degreeUZ,
+          positionEN: degreeEN,
+          positionKR: degreeKR,
+          positionRU: degreeRU,
+          positionUZ: degreeUZ,
           linkedln: likedin,
           phoneNumber: phone,
           skype: skype,
           telegramlink: telegram,
           twitterlink: twitter,
-          leadershipStatus: "DEKANAT",
           facebooklink: facebook,
+          departmentid: moliyaSelection,
         })
         .then((res) => {
           console.log(res.data);
@@ -274,10 +282,11 @@ const Dekanat = () => {
     setTelegram("");
     setTwitter("");
     setFacebook("");
+    setMoliyaSelection("");
   };
   const getData = () => {
     http
-      .get("/api/public/allLeaderShipstatusDekanat")
+      .get("/api/public/allEmployee")
       .then((res) => {
         console.log(res.data);
         setAlldata(res.data);
@@ -288,7 +297,7 @@ const Dekanat = () => {
   };
   const deleteData = (id) => {
     http
-      .delete(`/api/user/deleteLeadership/${id}`)
+      .delete(`/api/user/deleteEmployee/${id}`)
       .then((res) => {
         console.log(res.data);
         if (res.data?.success) {
@@ -324,15 +333,15 @@ const Dekanat = () => {
     setEdit(true);
     setModal(true);
     setEditId(data?.id);
-    setImageArr([data?.file]);
+    setImageArr([data?.image]);
     setTitleRu(data?.fullNameRU);
     setTitleKr(data?.fullNameKR);
     setTitleUz(data?.fullNameUZ);
     setTitleEn(data?.fullNameEN);
-    setDegreeRU(data?.degreeRU);
-    setDegreeKR(data?.degreeKR);
-    setDegreeUZ(data?.degreeUZ);
-    setDegreeEN(data?.degreeEN);
+    setDegreeRU(data?.positionRU);
+    setDegreeKR(data?.positionKR);
+    setDegreeUZ(data?.positionUZ);
+    setDegreeEN(data?.positionEN);
     setDutiesRU(data?.dutiesRU);
     setDutiesKR(data?.dutiesKR);
     setDutiesUZ(data?.dutiesUZ);
@@ -348,10 +357,30 @@ const Dekanat = () => {
     setDescriptionru(data?.biographyRU);
     setDescriptionuz(data?.biographyUZ);
     setDescriptionkr(data?.biographyKR);
+    setMoliyaSelection(data?.departmentsId);
   };
 
   useEffect(() => {
     getData();
+  }, [refresh]);
+
+  const handleChange = (event) => {
+    setMoliyaSelection(event.target.value);
+  };
+
+  const getMoliyaType = () => {
+    http
+      .get("/api/public/allDepartments")
+      .then((res) => {
+        console.log(res.data);
+        setMoliyatype(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    getMoliyaType();
   }, [refresh]);
   return (
     <>
@@ -361,7 +390,7 @@ const Dekanat = () => {
           Add new
         </Button>
       </div>
-      <Rahbartable
+      <Empolyetable
         handleEdit={handleEdit}
         data={allData}
         handleDelete={deleteData}
@@ -375,7 +404,7 @@ const Dekanat = () => {
         <Box sx={style}>
           <h2 className="elontitle">
             {" "}
-            Fakultet Rahbari {edit ? "tahrirlash" : "qo'shish"}
+            Hodim qushish {edit ? "tahrirlash" : "qo'shish"}
           </h2>
           <div className="elontitlewrapper">
             <TextField
@@ -563,7 +592,7 @@ const Dekanat = () => {
             <TextField
               className="elontextarea"
               id="outlined-multiline-static"
-              label="biographyRu"
+              label="DescribtionRu"
               multiline
               defaultValue={descriptionru}
               onChange={(e) => setDescriptionru(e.target.value)}
@@ -587,6 +616,27 @@ const Dekanat = () => {
               onChange={(e) => setDescriptionkr(e.target.value)}
               rows={4}
             />
+          </div>
+          <div>
+            <FormControl style={{ marginTop: "20px" }} fullWidth>
+              <InputLabel id="demo-simple-select-label">
+                Kaferdera tanlash
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={moliyaSelection}
+                defaultValue={moliyaSelection}
+                label="Fakultet rahbarlari"
+                onChange={handleChange}
+              >
+                {moliyatype.map((item, index) => (
+                  <MenuItem key={index} value={item.id}>
+                    {item.nameUZ}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </div>
 
           <div className="elonimg">
@@ -625,4 +675,4 @@ const Dekanat = () => {
   );
 };
 
-export default Dekanat;
+export default Empolye;

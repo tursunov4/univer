@@ -117,7 +117,7 @@ const Hamkorlar = () => {
         });
     } else {
       http
-        .post("/api/user/addpartner", {
+        .post("/api/user/partner", {
           icon: arr?.at(-1),
           link: titleEn,
         })
@@ -235,7 +235,7 @@ const Hamkorlar = () => {
     setEdit(true);
     setModal(true);
     setEditId(data?.id);
-    setImageArr([data?.icon]);
+    setImageArr([data?.attachDto]);
     setTitleEn(data?.link);
   };
 

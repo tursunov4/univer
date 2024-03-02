@@ -450,35 +450,43 @@ const Rahbariyat = () => {
           </div>
           <div className="elontitlewrapper">
             <TextField
+              multiline
+              rows={4}
               onChange={(e) => setDutiesUZ(e.target.value)}
               defaultValue={dutiesUZ}
               className="elontitleinput"
               id="outlined-basic"
-              label="dutiesUZ"
+              label="VazifalarUZ"
               variant="outlined"
             />
             <TextField
+              multiline
+              rows={4}
               onChange={(e) => setDutiesRU(e.target.value)}
               defaultValue={dutiesRU}
               className="elontitleinput"
               id="outlined-basic"
-              label="dutiesRu"
+              label="VazifalarRu"
               variant="outlined"
             />
             <TextField
+              multiline
+              rows={4}
               onChange={(e) => setDutiesEN(e.target.value)}
               defaultValue={dutiesEN}
               className="elontitleinput"
               id="outlined-basic"
-              label="dutiesEn"
+              label="VazifalarEn"
               variant="outlined"
             />
             <TextField
+              multiline
+              rows={4}
+              label="VazifalarKr"
               onChange={(e) => setDutiesKR(e.target.value)}
               defaultValue={dutiesKR}
               className="elontitleinput"
               id="outlined-basic"
-              label="dutiesKr"
               variant="outlined"
             />
           </div>

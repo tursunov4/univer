@@ -142,7 +142,7 @@ export default function Hamkortable({ handleEdit, handleDelete, data }) {
                 </TableCell>
 
                 <TableCell component="th" scope="row">
-                  <p key={index}>{row?.icon?.orginalName}</p>
+                  <p key={index}>{row?.attachDto?.orginalName}</p>
                 </TableCell>
                 <TableCell>
                   <Button

@@ -7,9 +7,8 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import http from "../../../untils/axios";
 import { ToastContainer, toast } from "react-toastify";
-import Nizomtable from "../../../components/Allinfor/Nizomtable";
 import "react-toastify/dist/ReactToastify.css";
-import Rahbartable from "../../../components/Rahbariyat/Rahbariyattable";
+import Kafedaratable from "../../../components/Rahbariyat/Kafedaratable";
 const style = {
   position: "fixed",
   top: "50%",
@@ -279,7 +278,7 @@ const Kafedera = () => {
   };
   const getData = () => {
     http
-      .get("/api/public/allLeaderShipstatusFacultet")
+      .get("/api/public/allLeaderShipstatusKafedra")
       .then((res) => {
         console.log(res.data);
         setAlldata(res.data);
@@ -364,7 +363,7 @@ const Kafedera = () => {
           Add new
         </Button>
       </div>
-      <Rahbartable
+      <Kafedaratable
         handleEdit={handleEdit}
         data={allData}
         handleDelete={deleteData}
@@ -451,35 +450,43 @@ const Kafedera = () => {
           </div>
           <div className="elontitlewrapper">
             <TextField
+              multiline
+              rows={4}
               onChange={(e) => setDutiesUZ(e.target.value)}
               defaultValue={dutiesUZ}
               className="elontitleinput"
               id="outlined-basic"
-              label="dutiesUZ"
+              label="VazifalarUZ"
               variant="outlined"
             />
             <TextField
+              multiline
+              rows={4}
               onChange={(e) => setDutiesRU(e.target.value)}
               defaultValue={dutiesRU}
               className="elontitleinput"
               id="outlined-basic"
-              label="dutiesRu"
+              label="VazifalarRu"
               variant="outlined"
             />
             <TextField
+              multiline
+              rows={4}
               onChange={(e) => setDutiesEN(e.target.value)}
               defaultValue={dutiesEN}
               className="elontitleinput"
               id="outlined-basic"
-              label="dutiesEn"
+              label="VazifalarEn"
               variant="outlined"
             />
             <TextField
+              multiline
+              rows={4}
               onChange={(e) => setDutiesKR(e.target.value)}
               defaultValue={dutiesKR}
               className="elontitleinput"
               id="outlined-basic"
-              label="dutiesKr"
+              label="VazifalarKr"
               variant="outlined"
             />
           </div>
