@@ -592,7 +592,7 @@ const Empolye = () => {
             <TextField
               className="elontextarea"
               id="outlined-multiline-static"
-              label="DescribtionRu"
+              label="biographyRu"
               multiline
               defaultValue={descriptionru}
               onChange={(e) => setDescriptionru(e.target.value)}
